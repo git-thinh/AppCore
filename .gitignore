@@ -4,3 +4,10 @@
 /Libs/IpcChannel/bin
 /Libs/IpcChannel/obj
 /Build/IpcChannel/Libs.IpcChannel.pdb
+/Webs/IISNotify/bin
+/Webs/IISNotify/obj
+/Webs/IISNotify/IISNotify.csproj.user
+/Libs/IpcChannel/Libs.IpcChannel.csproj.user
+/Libs/Libs.IpcChannel/obj
+/Libs/Libs.IpcChannel/bin
+/Libs/Libs.IpcChannel/Libs.IpcChannel.csproj.user
