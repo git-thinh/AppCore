@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj", "{9CF2C238-156A-4457-8AD1-670E13629D4A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{688EF844-1CBA-47A0-8DC1-D1EA5332B964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpcChannel", "Libs\IpcChannel\IpcChannel.csproj", "{E800D175-2217-492C-A0B1-2F71F5071ABF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{9CF2C238-156A-4457-8AD1-670E13629D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CF2C238-156A-4457-8AD1-670E13629D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CF2C238-156A-4457-8AD1-670E13629D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E800D175-2217-492C-A0B1-2F71F5071ABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E800D175-2217-492C-A0B1-2F71F5071ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E800D175-2217-492C-A0B1-2F71F5071ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E800D175-2217-492C-A0B1-2F71F5071ABF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E800D175-2217-492C-A0B1-2F71F5071ABF} = {688EF844-1CBA-47A0-8DC1-D1EA5332B964}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3630947-F0B4-4E30-92D8-5C573FA33785}
