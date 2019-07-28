@@ -9,7 +9,7 @@ namespace IISNotify
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            RouteTable.Routes.Add(new ServiceRoute("token", new SesionSocketFactory(), typeof(SesionSocketService)));
+            RouteTable.Routes.Add(new ServiceRoute("token", new SesionSocketFactory(), typeof(SessionSocketService)));
 
             // Dynamically create new timer
             System.Timers.Timer timScheduledTask = new System.Timers.Timer();
@@ -26,7 +26,7 @@ namespace IISNotify
 
         void timScheduledTask_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            SesionSocketService.AutoCheckForTimer();
+            //SessionSocketService.AutoCheckForTimer();
         }
 
         protected void Session_Start(object sender, EventArgs e)
