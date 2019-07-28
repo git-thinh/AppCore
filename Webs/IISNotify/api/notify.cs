@@ -16,6 +16,10 @@ namespace IISNotify
         StreamWriter _streamWriter = null;
         HttpResponseMessage _response = null;
 
+        public notifyController()
+        {
+        }
+
         public notifyController(IDataflow dataflow)
         {
             _dataflow = dataflow;
@@ -27,7 +31,7 @@ namespace IISNotify
             _streamWriter.Dispose();
         }
 
-        public HttpResponseMessage Get([FromUri]string sessionid)
+        public HttpResponseMessage Get([FromUri]string sessionid = "")
         {
             //this.ActionContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
@@ -39,6 +43,7 @@ namespace IISNotify
                 //string header = this.ActionContext.Request.Headers.get_headerValues_forToken();
                 //_sessionId = Guid.NewGuid().ToString();
                 _sessionId = sessionid;
+                _token = Guid.NewGuid().ToString();
                 //_token = _dataflow.notify_registerSessionId_returnToken(_sessionId, onIpcSignalMessageEvent, header);
             }
 
@@ -49,9 +54,10 @@ namespace IISNotify
 
         void onIpcSignalMessageEvent(object sender, IpcSignalEventArgs e)
         {
-            if (e.Arguments[0] == "[CLOSE]") {
+            if (e.Arguments[0] == "[CLOSE]")
+            {
                 _streamWriter.Close();
-                _streamWriter.Dispose(); 
+                _streamWriter.Dispose();
                 _response.Dispose();
 
                 //_dataflow.notify_unRegisterSessionId(e.EventName, this.onIpcSignalMessageEvent);
