@@ -102,6 +102,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Global.asax" />
+    <Content Include="StockQuoteService.svc" />
     <Content Include="Web.config" />
     <None Include="Connected Services\StockQuoteServiceReference\StockQuoteService.wsdl" />
     <None Include="Connected Services\StockQuoteServiceReference\StockQuoteService1.xsd">

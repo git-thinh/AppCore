@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 using System.Threading.Tasks;
 using Microsoft.ServiceModel.WebSockets;
 
-namespace IISNotify
+namespace Admin
 {
     public interface ISocketService {
         bool isOpend { set; get; }
@@ -86,6 +88,42 @@ namespace IISNotify
             WebSocketHost host = new WebSocketHost(serviceType, baseAddresses);
             host.AddWebSocketEndpoint();
             return host;
+        }
+    }
+    
+    internal static class SesionSocketRunConsole
+    {
+        static Binding _binding;
+        static WebSocketHost<SessionSocketService> _host;
+
+        internal static void Start(string ip = "")
+        {
+            //string uri = string.Format("ws://{0}/token", ip);
+            string uri = "ws://localhost:12345/token";
+
+            //_host = new WebSocketHost<WebSocketServiceImpl>(new Uri(uri));
+            _host = new WebSocketHost<SessionSocketService>(new ServiceThrottlingBehavior()
+            {
+                MaxConcurrentSessions = int.MaxValue,
+                MaxConcurrentCalls = 99,
+                MaxConcurrentInstances = 100000
+            }, new Uri(uri));
+
+            //_binding = WebSocketHost.CreateWebSocketBinding(false);
+            //_binding = WebSocketHost.CreateWebSocketBinding(false, 1024, 1024);
+            _binding = WebSocketHost.CreateWebSocketBinding(https: false, sendBufferSize: 2048, receiveBufferSize: 2048);
+            _binding.SendTimeout = TimeSpan.FromMilliseconds(500);
+            _binding.OpenTimeout = TimeSpan.FromDays(1);
+
+            _host.AddWebSocketEndpoint(_binding);
+            _host.Credentials.UseIdentityConfiguration = true;
+
+            _host.Open();
+        }
+
+        internal static void Stop()
+        {
+            _host.Close();
         }
     }
 }
