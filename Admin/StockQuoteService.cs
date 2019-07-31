@@ -70,7 +70,7 @@ namespace Admin
 
             while (((IChannel)callback).State == CommunicationState.Opened)
             {
-                await callback.SendQuote("MSFT", price);
+                await callback.SendQuote(_dataflow.test1(string.Empty), price);
                 price += random.NextDouble();
                 await Task.Delay(1000);
             }

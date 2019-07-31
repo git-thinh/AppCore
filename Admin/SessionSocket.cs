@@ -99,7 +99,7 @@ namespace Admin
         internal static void Start(string ip = "")
         {
             //string uri = string.Format("ws://{0}/token", ip);
-            string uri = "ws://localhost:12345/token";
+            string uri = "ws://localhost:12345/notify";
 
             //_host = new WebSocketHost<WebSocketServiceImpl>(new Uri(uri));
             _host = new WebSocketHost<SessionSocketService>(new ServiceThrottlingBehavior()
