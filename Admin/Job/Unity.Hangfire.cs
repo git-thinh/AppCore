@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hangfire;
+using System; 
 using Unity;
 
-namespace Admin
-{ 
+namespace Hangfire
+{
     public class UnityJobActivator : Hangfire.JobActivator
     {
         private readonly IUnityContainer _container;

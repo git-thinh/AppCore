@@ -23,16 +23,15 @@ namespace Admin
             Dataflow dataflow = new Dataflow();
             var notifyService = new StockQuoteService(dataflow);
             //=======================================================================================================
+            // Call this before you initialize a new BackgroundJobServer()
+            var container = new Unity.UnityContainer();
+            GlobalConfiguration.Configuration.UseActivator(new UnityJobActivator(container));
+            container.RegisterInstance<IDataflow>(dataflow);
+            container.RegisterInstance<INotifyService>(notifyService);
+            //=======================================================================================================
             JobStorage storage = new MemoryStorage(new MemoryStorageOptions());
             LogProvider.SetCurrentLogProvider(new ColouredConsoleLogProvider());
             var serverOptions = new BackgroundJobServerOptions() { ShutdownTimeout = TimeSpan.FromSeconds(5) };
-
-            // Call this before you initialize a new BackgroundJobServer()
-            var container = new Unity.UnityContainer();
-            //container.RegisterInstance("IDataflow", dataflow);
-            container.RegisterInstance<IDataflow>(dataflow);
-            JobActivator.Current = new UnityJobActivator(container);
-
             var server = new BackgroundJobServer(serverOptions, storage);
             JobStorage.Current = storage;
 
