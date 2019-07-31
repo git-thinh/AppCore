@@ -53,7 +53,11 @@ namespace Admin
         Task StartSendingQuotes();
     }
 
-    public class StockQuoteService : IStockQuoteService
+    public interface INotifyService {
+        void Push(string message);
+    }
+
+    public class StockQuoteService : IStockQuoteService, INotifyService
     {
         readonly IDataflow _dataflow;
         public StockQuoteService(IDataflow dataflow) : base()
@@ -61,6 +65,12 @@ namespace Admin
             _dataflow = dataflow;
             string test = dataflow.test1("");
         }
+
+        public void Push(string message)
+        {
+            
+        }
+
 
         public async Task StartSendingQuotes()
         {
