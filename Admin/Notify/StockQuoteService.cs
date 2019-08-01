@@ -11,22 +11,7 @@ using System.Threading.Tasks;
 
 namespace Admin
 {
-    [ServiceContract(CallbackContract = typeof(IDuplexClient))]
-    public interface IDuplexService
-    {
-        [OperationContract]
-        void Subscribe(string userId);
-
-        [OperationContract]
-        void Unsubscribe(string userId);
-    }
-
-    [ServiceContract]
-    public interface IDuplexClient
-    {
-        [OperationContract(IsOneWay = true)]
-        void PushNotification(string msg);
-    }
+   
 
 
 
@@ -60,7 +45,7 @@ namespace Admin
         void Push(string message, long user_id = 0);
     }
 
-    public class StockQuoteService : IStockQuoteService, INotifyService
+    public class StockQuoteService : IStockQuoteService 
     {
         static ConcurrentDictionary<long, StringBuilder> _userMessage = new ConcurrentDictionary<long, StringBuilder>() { };
         static ConcurrentDictionary<long, ManualResetEvent> _userSignal = new ConcurrentDictionary<long, ManualResetEvent>() { };
@@ -72,25 +57,25 @@ namespace Admin
             string test = dataflow.test1("");
         }
 
-        public void Push(string message, long user_id = 0)
-        {
-            StringBuilder buffer;
-            if (_userMessage.ContainsKey(user_id)
-                && _userMessage.TryGetValue(user_id, out buffer) && buffer != null)
-            {
-                if (buffer.Length == 0)
-                    buffer.Append(message);
-                else
-                    buffer.Append("|" + message);
-            }
-            else _userMessage.TryAdd(user_id, new StringBuilder(message));
+        //public void Push(string message, long user_id = 0)
+        //{
+        //    StringBuilder buffer;
+        //    if (_userMessage.ContainsKey(user_id)
+        //        && _userMessage.TryGetValue(user_id, out buffer) && buffer != null)
+        //    {
+        //        if (buffer.Length == 0)
+        //            buffer.Append(message);
+        //        else
+        //            buffer.Append("|" + message);
+        //    }
+        //    else _userMessage.TryAdd(user_id, new StringBuilder(message));
 
-            ManualResetEvent signal;
-            if (_userSignal.ContainsKey(user_id)
-                && _userSignal.TryGetValue(user_id, out signal) && signal != null)
-                signal.Set();
-            else _userSignal.TryAdd(user_id, new ManualResetEvent(false));
-        }
+        //    ManualResetEvent signal;
+        //    if (_userSignal.ContainsKey(user_id)
+        //        && _userSignal.TryGetValue(user_id, out signal) && signal != null)
+        //        signal.Set();
+        //    else _userSignal.TryAdd(user_id, new ManualResetEvent(false));
+        //}
 
 
         public async Task StartSendingQuotes()

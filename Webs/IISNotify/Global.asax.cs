@@ -9,7 +9,7 @@ namespace IISNotify
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            RouteTable.Routes.Add(new ServiceRoute("token", new SesionSocketFactory(), typeof(SessionSocketService)));
+            //RouteTable.Routes.Add(new ServiceRoute("token", new SesionSocketFactory(), typeof(SessionSocketService)));
 
             // Dynamically create new timer
             System.Timers.Timer timScheduledTask = new System.Timers.Timer();
